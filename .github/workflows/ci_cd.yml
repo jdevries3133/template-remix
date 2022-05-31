@@ -34,8 +34,8 @@ jobs:
           mkdir ~/.kube
           echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
 
-      - name: push container to Docker Hub
-        run: make push
+      # - name: push container to Docker Hub
+      #   run: make push
 
       # - name: deploy to Kubernetes with terraform
       #   env:
