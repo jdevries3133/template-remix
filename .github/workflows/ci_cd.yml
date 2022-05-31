@@ -37,9 +37,9 @@ jobs:
       - name: push container to Docker Hub
         run: make push
 
-      - name: deploy to Kubernetes with terraform
-        env:
-          # credentials are used for terraform state bucket
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: make deploy
+      # - name: deploy to Kubernetes with terraform
+      #   env:
+      #     # credentials are used for terraform state bucket
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: make deploy
