@@ -26,3 +26,7 @@ https://jackdevries.com/blog/myCluster
    application domain.
 4. The tailwind config is basically empty, but it's always good to do this
    early in a new project as you put together the design system.
+5. In `./schema.prisma` there is a demo model which you probably want to
+   delete. Also, delete the migrations for that model (`rm -rf migrations`).
+   Add the schema for your own app, then generate an initial migration by
+   running `yarn prisma:migrate` _inside the container._
