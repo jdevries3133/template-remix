@@ -13,7 +13,7 @@
     "build:tailwind": "tailwindcss -i styles/tailwind.css -o app/tailwind.css",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:deploy": "prisma migrate deploy",
+    "prisma:deploy": "echo \"WARNING: change to 'prisma migrate deploy' when you want to use the database\"",
     "prisma:studio": "prisma studio",
     "postinstall": "remix setup node",
     "test": "vitest",

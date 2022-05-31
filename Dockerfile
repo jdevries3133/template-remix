@@ -11,6 +11,8 @@ COPY . .
 
 RUN yarn build:all
 
+ENTRYPOINT ["yarn", "dev"]
+
 
 FROM node:16-alpine as prod
 
