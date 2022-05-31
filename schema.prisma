@@ -1,0 +1,17 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+// boilerplate model -- prisma doesn't startup without it. Migrations are not
+// generated for this model yet, and it's not used.
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}

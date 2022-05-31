@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    z-index: 10;
+  }
+  h1 {
+    @apply font-bold text-3xl font-serif;
+  }
+
+  h2 {
+    @apply text-2xl font-serif;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  h4 {
+    @apply text-lg;
+  }
+}
+
+.prose p code {
+  @apply font-bold;
+}
+
+.prose a {
+  @apply rounded focus:ring-4 focus:ring-primary-400 outline-none;
+}
+
+/* tailwind puts backticks around inline <code> tags. This removes them */
+code:before {
+  display: none;
+}
+
+code:after {
+  display: none;
+}

@@ -1,0 +1,10 @@
+node_modules
+Dockerfile
+
+/.cache
+/build
+/dist
+/public/build
+app/tailwind.css
+
+.env

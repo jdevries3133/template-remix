@@ -1,0 +1,49 @@
+SHELL=/bin/bash
+
+DOCKER_ACCOUNT=jdevries3133
+CONTAINER_NAME=remix_template
+
+TAG?=$(shell git describe --tags)
+PREV_TAG=$(shell git describe --tags $(git rev-list --parents -n 1 HEAD) | tail -n 1)
+
+# assuming the use of Docker hub, these constants need not be changed
+CONTAINER=$(DOCKER_ACCOUNT)/$(CONTAINER_NAME):$(TAG)
+
+
+.PHONY: deploy
+deploy:
+	terraform apply -auto-approve
+
+
+.PHONY: push
+push:
+	docker buildx build --pull --platform linux/amd64 --push -t $(CONTAINER) .
+
+
+.PHONY: check
+check:
+ifdef CI
+	docker-compose up -d
+endif
+	yarn typecheck
+	yarn test run
+	make wait
+	yarn cypress
+
+.PHONY: wait
+wait:
+	@while true; do \
+		curl --silent --output /dev/null http://localhost:8000; \
+		[ $$? == 0 ] && break; \
+		sleep 5; \
+		echo "awaiting server readiness"; \
+		docker-compose logs; \
+	done
+
+
+.PHONY: setup
+setup:
+	@# pulling the last container may grab cached layers
+	docker pull $(DOCKER_ACCOUNT)/$(CONTAINER_NAME):$(PREV_TAG) || echo "could not pull $(PREV_TAG)"
+	terraform init -input=false
+	yarn install
